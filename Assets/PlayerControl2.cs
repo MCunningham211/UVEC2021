@@ -2,27 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControl2 : MonoBehaviour
 {
-    public KeyCode moveUp = KeyCode.W;
-    public KeyCode moveDown = KeyCode.S;
-    public KeyCode moveLeft = KeyCode.A;
-    public KeyCode moveRight = KeyCode.D;
+    public KeyCode moveUp = KeyCode.UpArrow;
+    public KeyCode moveDown = KeyCode.DownArrow;
+    public KeyCode moveLeft = KeyCode.LeftArrow;
+    public KeyCode moveRight = KeyCode.RightArrow;
     public KeyCode shootBullet = KeyCode.Mouse0;
     public float speed = 1;
     private Rigidbody2D rb2d;
     public BulletControl pubBullet;
     private bool canShoot = true;
     private Camera cam;
-    public bool myAttack = true;
-    private GameObject enemyTank;
+    public bool myAttack = false;
     private int enemyScore = 0;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        enemyTank = GameObject.FindGameObjectWithTag("Enemy");
         cam = Camera.main;
     }
 
@@ -101,20 +100,15 @@ public class PlayerControl : MonoBehaviour
 
     // This is what gets called when a player gets hit
     void playerHit() {
-        if (myAttack) {
-            enemyScore++;
-        } else {
-            enemyTank.SendMessage("playerHit", 0f, SendMessageOptions.RequireReceiver);
-        }
+        enemyScore++;
     }
 
-    void endTurn() {
-        if (myAttack) {
-            myAttack = false;
-            enemyTank.SendMessage("startAttack", 0f, SendMessageOptions.RequireReceiver);
-        } else {
-            enemyTank.SendMessage("endGame", 0f, SendMessageOptions.RequireReceiver);
-        }
+    void endGame() {
+        // TODO: Swtch to game end scene
+    }
+
+    void startAttack() {
+        myAttack = true;
     }
 
     void setCanShootTrue() {

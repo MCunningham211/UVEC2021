@@ -100,7 +100,6 @@ public class Test_1 : MonoBehaviour
                 {
                     m_Sec = (m_TempSec -= 1).ToString();
                 }
-                transform.GetComponent<Text>().text = m_Mins + ":" + m_Sec;
             }
         }
     }
