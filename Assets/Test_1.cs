@@ -20,7 +20,7 @@ public class Test_1 : MonoBehaviour
         //SetTimed("00:00");
 
         //Countdown
-        SetTimed("10:00");
+        SetTimed("60:00");
         string TimeStr = transform.GetComponent<Text>().text;
         string[] TimeStrSplit = TimeStr.Split(':');
         m_TempMins = float.Parse(TimeStrSplit[0]);
@@ -38,7 +38,7 @@ public class Test_1 : MonoBehaviour
             {
                 if (transform.GetComponent<Text>().text == "59:59")
                 {
-                    transform.GetComponent<Text>().text = "10:00";
+                    transform.GetComponent<Text>().text = "60:00";
                     m_Mins = "00";
                     m_Sec = "00";
                     m_TempMins = 0;
@@ -76,16 +76,19 @@ public class Test_1 : MonoBehaviour
                     {
                         if (m_TempMins == 0)
                         {
-                            transform.GetComponent<Text>().text = "00:00";
+                            // transform.GetComponent<Text>().text = "00:00";
                             if (isFirst) {
                                 isFirst = false;
                                 m_IsTimed = true;
                                 playerTank.SendMessage("endTurn", 0f, SendMessageOptions.RequireReceiver);
+                                m_Mins = "59";
+                                m_Sec = "59";
+                                m_TempSec = 59;
+                                m_TempMins = 59;
                             } else {
                                 m_IsTimed = true;
+                                playerTank.SendMessage("endTurn", 0f, SendMessageOptions.RequireReceiver);
                             }
-                            m_Mins = "59";
-                            m_Sec = "59";
                         }
                         else
                         {
