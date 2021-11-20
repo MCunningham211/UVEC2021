@@ -8,7 +8,7 @@ public class PlayerControl : MonoBehaviour
     public KeyCode moveDown = KeyCode.S;
     public KeyCode moveLeft = KeyCode.A;
     public KeyCode moveRight = KeyCode.D;
-    public float speed = 10;
+    public float speed = 7;
     private Rigidbody2D rb2d;
     // Start is called before the first frame update
     void Start()
@@ -44,5 +44,31 @@ public class PlayerControl : MonoBehaviour
             pos.y = -2.5f;
         } 
         transform.position = pos;
+
+        if (velocity.x > 0 && velocity.y > 0){ //y is vertical, x is horezontal
+            Vector3 newRotation = new Vector3(0, 0, -45);
+            transform.eulerAngles = newRotation;
+        }else if (velocity.x > 0 && velocity.y == 0){
+            Vector3 newRotation = new Vector3(0, 0, 90);
+            transform.eulerAngles = newRotation;
+        }else if (velocity.x > 0 && velocity.y < 0){
+            Vector3 newRotation = new Vector3(0, 0, 45);
+            transform.eulerAngles = newRotation;
+        }else if (velocity.x == 0 && velocity.y < 0){
+            Vector3 newRotation = new Vector3(0, 0, 0);
+            transform.eulerAngles = newRotation;
+        }else if (velocity.x == 0 && velocity.y > 0){
+            Vector3 newRotation = new Vector3(0, 0, 0);
+            transform.eulerAngles = newRotation;
+        }else  if (velocity.x < 0 && velocity.y < 0){
+            Vector3 newRotation = new Vector3(0, 0, -45);
+            transform.eulerAngles = newRotation;
+        }else  if (velocity.x < 0 && velocity.y == 0){
+            Vector3 newRotation = new Vector3(0, 0, 90);
+            transform.eulerAngles = newRotation;
+        }else  if (velocity.x < 0 && velocity.y < 0){
+            Vector3 newRotation = new Vector3(0, 0, -45);
+            transform.eulerAngles = newRotation;
+        }
     }
 }
