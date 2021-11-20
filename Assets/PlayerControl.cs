@@ -83,6 +83,11 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    // This is what gets called when a player gets hit
+    void playerHit() {
+        
+    }
+
     void setCanShootTrue() {
         canShoot = true;
     }
