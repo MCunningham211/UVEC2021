@@ -118,6 +118,7 @@ public class PlayerControl : MonoBehaviour
             myAttack = false;
             enemyTank.SendMessage("startAttack", 0f, SendMessageOptions.RequireReceiver);
         } else {
+            gameController.SendMessage("gameEnd", 0f, SendMessageOptions.RequireReceiver);
             enemyTank.SendMessage("endGame", 0f, SendMessageOptions.RequireReceiver);
         }
     }

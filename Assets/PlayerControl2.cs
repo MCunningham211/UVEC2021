@@ -37,7 +37,7 @@ public class PlayerControl2 : MonoBehaviour
             bullet.rb2d.velocity = vel;
             bullet.transform.position = new Vector3(tankPos.x + (0.75f * diff.x), tankPos.y + (0.75f * diff.y));
             canShoot = false;
-            Invoke("setCanShootTrue", 1);
+            Invoke("setCanShootTrue", 1.5f);
         }
 
         var velocity = rb2d.velocity;
