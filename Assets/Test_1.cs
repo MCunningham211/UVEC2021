@@ -104,6 +104,12 @@ public class Test_1 : MonoBehaviour
             }
         }
     }
+private GUIStyle guiStyle = new GUIStyle(); //create a new variable
+    void OnGUI() {
+         guiStyle.fontSize = 20; //change the font size
+        Rect startButtonRect = new Rect(Screen.width / 2 - 35, 20, 120, 53);
+        GUI.Label(new Rect((Screen.width / 2) - 138, 20, 100, 100), m_Mins + ":" + m_Sec, guiStyle);
+    }
 
     public void SetTimed(string time)
     {
