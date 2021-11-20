@@ -1,7 +1,7 @@
 # UVEC2021
 Programing Project for UVEC 2021
 ## UI Mock-up/demo
-![](sheet_tanks.png)
+![](Assets/Sprites/sheet_tanks.png)
 
 ## About
 Our player-controlled tank project is based on Unity which allows two players to move tanks around using forces. Players can just simply shoot the enemy tanks, however, they get hurt by their own bullets too, so watch out! 
