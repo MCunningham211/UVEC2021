@@ -8,15 +8,19 @@ public class Test_1 : MonoBehaviour
     float m_TempMins = 0;
     float m_TempSec = 0;
     bool m_IsTimed = true;
+    bool isFirst = true;
     bool m_IsCountDown = true;
+    public GameObject playerTank;
+
 
     private void Awake()
     {
+        playerTank = GameObject.FindGameObjectWithTag("Player");
         //Timer
         //SetTimed("00:00");
 
         //Countdown
-        SetTimed("60:00");
+        SetTimed("10:00");
         string TimeStr = transform.GetComponent<Text>().text;
         string[] TimeStrSplit = TimeStr.Split(':');
         m_TempMins = float.Parse(TimeStrSplit[0]);
@@ -34,7 +38,7 @@ public class Test_1 : MonoBehaviour
             {
                 if (transform.GetComponent<Text>().text == "59:59")
                 {
-                    transform.GetComponent<Text>().text = "60:00";
+                    transform.GetComponent<Text>().text = "10:00";
                     m_Mins = "00";
                     m_Sec = "00";
                     m_TempMins = 0;
@@ -73,7 +77,15 @@ public class Test_1 : MonoBehaviour
                         if (m_TempMins == 0)
                         {
                             transform.GetComponent<Text>().text = "00:00";
-                            m_IsTimed = false;
+                            if (isFirst) {
+                                isFirst = false;
+                                m_IsTimed = true;
+                                playerTank.SendMessage("endTurn", 0f, SendMessageOptions.RequireReceiver);
+                            } else {
+                                m_IsTimed = true;
+                            }
+                            m_Mins = "59";
+                            m_Sec = "59";
                         }
                         else
                         {
