@@ -8,8 +8,12 @@ public class PlayerControl : MonoBehaviour
     public KeyCode moveDown = KeyCode.S;
     public KeyCode moveLeft = KeyCode.A;
     public KeyCode moveRight = KeyCode.D;
+    public KeyCode shootBullet = KeyCode.Mouse0;
     public float speed = 7;
     private Rigidbody2D rb2d;
+    public BulletControl pubBullet;
+    private bool canShoot = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +23,13 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetMouseButtonUp(0) && canShoot) {
+            BulletControl bullet = (BulletControl)Instantiate(pubBullet);
+            bullet.transform.position = new Vector3(1, 1);
+            canShoot = false;
+            Invoke("setCanShootTrue", 1);
+        }
+
         var velocity = rb2d.velocity;
         if (Input.GetKey(moveUp)) {
             velocity.y = speed;
@@ -70,5 +81,9 @@ public class PlayerControl : MonoBehaviour
             Vector3 newRotation = new Vector3(0, 0, -45);
             transform.eulerAngles = newRotation;
         }
+    }
+
+    void setCanShootTrue() {
+        canShoot = true;
     }
 }
