@@ -60,7 +60,7 @@ public class PlayerControl : MonoBehaviour
         }else if (velocity.x == 0 && velocity.y > 0){
             Vector3 newRotation = new Vector3(0, 0, 0);
             transform.eulerAngles = newRotation;
-        }else  if (velocity.x < 0 && velocity.y < 0){
+        }else  if (velocity.x < 0 && velocity.y > 0){
             Vector3 newRotation = new Vector3(0, 0, -45);
             transform.eulerAngles = newRotation;
         }else  if (velocity.x < 0 && velocity.y == 0){

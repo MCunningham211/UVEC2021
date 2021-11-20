@@ -252,7 +252,7 @@ SpriteRenderer:
   m_Size: {x: 0.12, y: 0.26}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &125080773
@@ -436,6 +436,7 @@ GameObject:
   - component: {fileID: 751174183}
   - component: {fileID: 751174182}
   - component: {fileID: 751174181}
+  - component: {fileID: 751174184}
   m_Layer: 0
   m_Name: PlayerBarrel
   m_TagString: Untagged
@@ -455,6 +456,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5afbb9c70c68c94e9ef6df938a3d39f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveUp: 119
+  moveDown: 115
+  moveLeft: 97
+  moveRight: 100
+  speed: 7
 --- !u!212 &751174182
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -520,6 +526,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &751174184
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751174180}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1082970775
 GameObject:
   m_ObjectHideFlags: 0
