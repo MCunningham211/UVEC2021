@@ -4,15 +4,45 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    public KeyCode moveUp = KeyCode.W;
+    public KeyCode moveDown = KeyCode.S;
+    public KeyCode moveLeft = KeyCode.A;
+    public KeyCode moveRight = KeyCode.D;
+    public float speed = 10;
+    private Rigidbody2D rb2d;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb2d = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        var velocity = rb2d.velocity;
+        if (Input.GetKey(moveUp)) {
+            velocity.y = speed;
+        } else if (Input.GetKey(moveDown)) {
+            velocity.y = -speed;
+        } else {
+            velocity.y = 0;
+        }
         
+        if (Input.GetKey(moveLeft)) {
+            velocity.x = -speed;
+        } else if (Input.GetKey(moveRight)) {
+            velocity.x = speed;
+        } else {
+            velocity.x = 0;
+        }
+        rb2d.velocity = velocity;
+
+        var pos = transform.position;
+        if (pos.y > 2.5f) {
+            pos.y = 2.5f;
+        } else if (pos.y < -2.5f) {
+            pos.y = -2.5f;
+        } 
+        transform.position = pos;
     }
 }
