@@ -8,17 +8,35 @@ public class PlayerControl : MonoBehaviour
     public KeyCode moveDown = KeyCode.S;
     public KeyCode moveLeft = KeyCode.A;
     public KeyCode moveRight = KeyCode.D;
-    public float speed = 7;
+    public KeyCode shootBullet = KeyCode.Mouse0;
+    public float speed = 1;
     private Rigidbody2D rb2d;
+    public BulletControl pubBullet;
+    private bool canShoot = true;
+    private Camera cam;
+
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        cam = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetMouseButtonUp(0) && canShoot) {
+            BulletControl bullet = (BulletControl)Instantiate(pubBullet);
+            Vector2 tankPos = transform.position;
+            Vector3 mousePos = getMouseCoords();
+            Vector3 diff = (new Vector3((mousePos.x - tankPos.x), (mousePos.y - tankPos.y), 0)).normalized;
+            Vector3 vel = diff * 3 * speed;
+            bullet.rb2d.velocity = vel;
+            bullet.transform.position = new Vector3(tankPos.x + (0.75f * diff.x), tankPos.y + (0.75f * diff.y));
+            canShoot = false;
+            Invoke("setCanShootTrue", 1);
+        }
+
         var velocity = rb2d.velocity;
         if (Input.GetKey(moveUp)) {
             velocity.y = speed;
@@ -61,7 +79,11 @@ public class PlayerControl : MonoBehaviour
             Vector3 newRotation = new Vector3(0, 0, 0);
             transform.eulerAngles = newRotation;
         }else  if (velocity.x < 0 && velocity.y > 0){
+<<<<<<< HEAD
             Vector3 newRotation = new Vector3(0, 0, -45);
+=======
+            Vector3 newRotation = new Vector3(0, 0, 45);
+>>>>>>> d68ced1b4c9144dfbb192fbc6958029b65f3e40b
             transform.eulerAngles = newRotation;
         }else  if (velocity.x < 0 && velocity.y == 0){
             Vector3 newRotation = new Vector3(0, 0, 90);
@@ -70,5 +92,24 @@ public class PlayerControl : MonoBehaviour
             Vector3 newRotation = new Vector3(0, 0, -45);
             transform.eulerAngles = newRotation;
         }
+    }
+
+    // This is what gets called when a player gets hit
+    void playerHit() {
+        
+    }
+
+    void setCanShootTrue() {
+        canShoot = true;
+    }
+
+    Vector2 getMouseCoords() {
+        Vector3 mousePosit = Input.mousePosition;
+        //This is code adapted directly from here: https://docs.unity3d.com/ScriptReference/Camera.ScreenToWorldPoint.html
+        Vector2 mousePos = new Vector2();
+        mousePos.x = mousePosit.x;
+        mousePos.y = (cam.pixelHeight - mousePosit.y);
+        Vector3 point = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));//Should update to mouse location
+        return new Vector3(point.x, -point.y, point.z); 
     }
 }
