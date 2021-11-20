@@ -16,6 +16,7 @@ public class PlayerControl : MonoBehaviour
     private Camera cam;
     public bool myAttack = true;
     private GameObject enemyTank;
+    private GameObject gameController;
     private int enemyScore = 0;
 
     // Start is called before the first frame update
@@ -23,6 +24,7 @@ public class PlayerControl : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         enemyTank = GameObject.FindGameObjectWithTag("Enemy");
+        gameController = GameObject.FindGameObjectWithTag("GameController");
         cam = Camera.main;
     }
 
@@ -101,9 +103,12 @@ public class PlayerControl : MonoBehaviour
 
     // This is what gets called when a player gets hit
     void playerHit() {
+        print("hit");
         if (myAttack) {
             enemyScore++;
+            gameController.SendMessage("Score1", 0f, SendMessageOptions.RequireReceiver);
         } else {
+            gameController.SendMessage("Score2", 0f, SendMessageOptions.RequireReceiver);
             enemyTank.SendMessage("playerHit", 0f, SendMessageOptions.RequireReceiver);
         }
     }

@@ -24,7 +24,7 @@ public class BulletControl : MonoBehaviour
     }
 
     void OnCollisionEnter2D (Collision2D coll) {
-        if (coll.collider.CompareTag("Player")) {
+        if (coll.collider.CompareTag("Player") || coll.collider.CompareTag("Enemy")) {
             playerTank.SendMessage("playerHit", 0f, SendMessageOptions.RequireReceiver);
             Destroy(gameObject);
         } else if (coll.collider.CompareTag("Wall")) {
