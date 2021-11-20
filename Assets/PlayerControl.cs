@@ -9,15 +9,17 @@ public class PlayerControl : MonoBehaviour
     public KeyCode moveLeft = KeyCode.A;
     public KeyCode moveRight = KeyCode.D;
     public KeyCode shootBullet = KeyCode.Mouse0;
-    public float speed = 7;
+    public float speed = 1;
     private Rigidbody2D rb2d;
     public BulletControl pubBullet;
     private bool canShoot = true;
+    private Camera cam;
 
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        cam = Camera.main;
     }
 
     // Update is called once per frame
@@ -25,7 +27,12 @@ public class PlayerControl : MonoBehaviour
     {
         if(Input.GetMouseButtonUp(0) && canShoot) {
             BulletControl bullet = (BulletControl)Instantiate(pubBullet);
-            bullet.transform.position = new Vector3(1, 1);
+            Vector2 tankPos = transform.position;
+            Vector3 mousePos = getMouseCoords();
+            Vector3 diff = (new Vector3((mousePos.x - tankPos.x), (mousePos.y - tankPos.y), 0)).normalized;
+            Vector3 vel = diff * 3 * speed;
+            bullet.rb2d.velocity = vel;
+            bullet.transform.position = new Vector3(tankPos.x + (0.75f * diff.x), tankPos.y + (0.75f * diff.y));
             canShoot = false;
             Invoke("setCanShootTrue", 1);
         }
@@ -90,5 +97,15 @@ public class PlayerControl : MonoBehaviour
 
     void setCanShootTrue() {
         canShoot = true;
+    }
+
+    Vector2 getMouseCoords() {
+        Vector3 mousePosit = Input.mousePosition;
+        //This is code adapted directly from here: https://docs.unity3d.com/ScriptReference/Camera.ScreenToWorldPoint.html
+        Vector2 mousePos = new Vector2();
+        mousePos.x = mousePosit.x;
+        mousePos.y = (cam.pixelHeight - mousePosit.y);
+        Vector3 point = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));//Should update to mouse location
+        return new Vector3(point.x, -point.y, point.z); 
     }
 }

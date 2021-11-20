@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf9bc4948d656c848b0634db71cfeedf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb2d: {fileID: 0}
   maxWallCollisions: 1
 --- !u!50 &125080770
 Rigidbody2D:
@@ -787,7 +788,7 @@ MonoBehaviour:
   moveLeft: 97
   moveRight: 100
   shootBullet: 323
-  speed: 10
+  speed: 2
   pubBullet: {fileID: 125080769}
 --- !u!50 &1279151242
 Rigidbody2D:

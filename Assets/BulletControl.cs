@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletControl : MonoBehaviour
 {
-    private Rigidbody2D rb2d;
+    public Rigidbody2D rb2d;
     private int wallCollisions;
     public int maxWallCollisions = 3;
     private GameObject playerTank;
@@ -21,13 +21,6 @@ public class BulletControl : MonoBehaviour
     void Update()
     {
         
-    }
-
-    void testMove() {
-        // This starts the bullet moving, use to test it out
-        var velocity = rb2d.velocity;
-        velocity.y = 5;
-        rb2d.velocity = velocity;
     }
 
     void OnCollisionEnter2D (Collision2D coll) {
