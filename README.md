@@ -1,5 +1,5 @@
 # UVEC2021
-Programing Project for UVEC 2021(We won, woooot)
+Programing Project for UVEC 2021(We won, woooot!)
 ## UI Mock-up/demo
 ![](Assets/Sprites/sheet_tanks.png)
 
