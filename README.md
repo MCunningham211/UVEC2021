@@ -12,7 +12,7 @@ Our player-controlled tank project is based on Unity which allows two players to
 2. Install Unity Hub (if you haven't already)
 3. Install VSCode (if you haven't already)
 4. Navigate to the root directory of the project
-5. Open the executable file, and clock the .exe file to play
+5. Open the executable file, and click the .exe file to play
 
 ## Project Description
 The project Description can be found here:
